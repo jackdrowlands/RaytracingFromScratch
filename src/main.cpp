@@ -1,24 +1,12 @@
-#include <iostream>
+#include "../include/hittable.h"
+#include "../include/hittableList.h"
+#include "../include/sphere.h"
+#include "../include/utils.h"
 
-#include "../include/color.h"
-#include "../include/ray.h"
-#include "../include/vec3.h"
-
-double hitSphere(const point3& center, double radius, const ray& r) {
-  vec3 oc = center - r.origin();
-  auto a = r.direction().length_squared();
-  auto h = dot(r.direction(), oc);
-  auto c = oc.length_squared() - radius * radius;
-  auto discriminant = h * h - a * c;
-  if (discriminant < 0) return -1.0;
-  return (h - std::sqrt(discriminant)) / a;
-}
-
-color rayColor(const ray& r) {
-  auto t = hitSphere(point3(0, 0, -1), 0.5, r);
-  if (t > 0.0) {
-    vec3 N = unitVector(r.at(t) - vec3(0, 0, -1));
-    return 0.5 * color(N.x() + 1, N.y() + 1, N.z() + 1);
+color rayColor(const ray& r, const hittable& world) {
+  hitRecord rec;
+  if (world.hit(r, 0, INF, rec)) {
+    return 0.5 * (rec.normal + color(1, 1, 1));
   }
 
   vec3 unitDirection = unitVector(r.direction());
@@ -31,6 +19,10 @@ int main() {
   int imageWidth = 2560;
 
   int imageHeight = std::max(static_cast<int>(imageWidth / aspectRatio), 1);
+
+  hittableList world;
+  world.add(make_shared<sphere>(point3(0, 0, -1), 0.5));
+  world.add(make_shared<sphere>(point3(0, -100.5, -1), 100));
 
   auto focalLength = 1.0;
   auto viewportHeight = 2.0;
@@ -50,7 +42,6 @@ int main() {
       viewportUpperLeft + 0.5 * pixedlDeltaU + 0.5 * pixedlDeltaV;
 
   std::cout << "P3\n" << imageWidth << " " << imageHeight << "\n255\n";
-
   for (int i = 0; i < imageHeight; i++) {
     std::clog << "\rScanlines remaining: " << (imageHeight - i) << " "
               << std::flush;
@@ -59,7 +50,7 @@ int main() {
       auto rayDirection = pixelCenter - origin;
       ray r(origin, rayDirection);
 
-      color pixelColor = rayColor(r);
+      color pixelColor = rayColor(r, world);
       writeColor(std::cout, pixelColor);
     }
   }
