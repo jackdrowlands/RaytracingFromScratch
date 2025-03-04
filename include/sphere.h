@@ -15,9 +15,9 @@ class sphere : public hittable {
   bool hit(const ray& r, interval rayT,
            hitRecord& rec) const override {
     vec3 oc = center - r.origin();
-    auto a = r.direction().length_squared();
+    auto a = r.direction().lengthSquared();
     auto h = dot(r.direction(), oc);
-    auto c = oc.length_squared() - std::pow(radius, 2);
+    auto c = oc.lengthSquared() - std::pow(radius, 2);
 
     auto discriminant = h * h - a * c;
     if (discriminant < 0) return false;
