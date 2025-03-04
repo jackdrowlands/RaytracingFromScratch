@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/Users/jack/raytracingInAWeekend/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++2b -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -o CMakeFiles/raytracingInAWeekend.dir/src/main.cpp.o -c /Users/jack/raytracingInAWeekend/src/main.cpp",
-  "file": "/Users/jack/raytracingInAWeekend/src/main.cpp",
-  "output": "CMakeFiles/raytracingInAWeekend.dir/src/main.cpp.o"
-}
-]

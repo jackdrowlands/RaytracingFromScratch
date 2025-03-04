@@ -1,3 +1,0 @@
-/Users/jack/raytracingInAWeekend/build/CMakeFiles/raytracingInAWeekend.dir
-/Users/jack/raytracingInAWeekend/build/CMakeFiles/edit_cache.dir
-/Users/jack/raytracingInAWeekend/build/CMakeFiles/rebuild_cache.dir
