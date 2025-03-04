@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/raytracingInAWeekend.dir/link.d"
   "CMakeFiles/raytracingInAWeekend.dir/src/main.cpp.o"
   "CMakeFiles/raytracingInAWeekend.dir/src/main.cpp.o.d"
   "raytracingInAWeekend"

@@ -1,3 +1,5 @@
+#include <cassert>
+
 #include "../include/hittable.h"
 #include "../include/hittableList.h"
 #include "../include/sphere.h"
@@ -5,7 +7,7 @@
 
 color rayColor(const ray& r, const hittable& world) {
   hitRecord rec;
-  if (world.hit(r, 0, INF, rec)) {
+  if (world.hit(r, interval(0, INF), rec)) {
     return 0.5 * (rec.normal + color(1, 1, 1));
   }
 
@@ -33,20 +35,19 @@ int main() {
   auto viewportU = vec3(viewportWidth, 0, 0);
   auto viewportV = vec3(0, -viewportHeight, 0);
 
-  auto pixedlDeltaU = viewportU / imageWidth;
-  auto pixedlDeltaV = viewportV / imageHeight;
+  auto pixelDeltaU = viewportU / imageWidth;
+  auto pixelDeltaV = viewportV / imageHeight;
 
   auto viewportUpperLeft =
       origin - vec3(0, 0, focalLength) - viewportU / 2 - viewportV / 2;
-  auto pixel100Loc =
-      viewportUpperLeft + 0.5 * pixedlDeltaU + 0.5 * pixedlDeltaV;
+  auto pixel100Loc = viewportUpperLeft + 0.5 * pixelDeltaU + 0.5 * pixelDeltaV;
 
   std::cout << "P3\n" << imageWidth << " " << imageHeight << "\n255\n";
   for (int i = 0; i < imageHeight; i++) {
     std::clog << "\rScanlines remaining: " << (imageHeight - i) << " "
               << std::flush;
     for (int j = 0; j < imageWidth; j++) {
-      auto pixelCenter = pixel100Loc + (j * pixedlDeltaU) + (i * pixedlDeltaV);
+      auto pixelCenter = pixel100Loc + (j * pixelDeltaU) + (i * pixelDeltaV);
       auto rayDirection = pixelCenter - origin;
       ray r(origin, rayDirection);
 

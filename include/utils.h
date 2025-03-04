@@ -5,6 +5,7 @@
 #include <iostream>
 #include <limits>
 #include <memory>
+#include <numbers>
 
 using std::make_shared;
 using std::shared_ptr;
@@ -17,5 +18,6 @@ inline double degreesToRadians(double d) { return d * PI / 180.0; }
 #include "color.h"
 #include "ray.h"
 #include "vec3.h"
+#include "interval.h"
 
 #endif
