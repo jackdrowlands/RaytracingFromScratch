@@ -876,6 +876,7 @@ CMakeFiles/raytracingInAWeekend.dir/src/main.cpp.o: /Users/jack/raytracingInAWee
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h \
+  /Users/jack/raytracingInAWeekend/include/camera.h \
   /Users/jack/raytracingInAWeekend/include/color.h \
   /Users/jack/raytracingInAWeekend/include/hittable.h \
   /Users/jack/raytracingInAWeekend/include/hittableList.h \
@@ -2337,6 +2338,8 @@ CMakeFiles/raytracingInAWeekend.dir/src/main.cpp.o: /Users/jack/raytracingInAWee
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__algorithm/pstl_transform.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__iterator/istreambuf_iterator.h:
+
+/Users/jack/raytracingInAWeekend/include/camera.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk/usr/include/c++/v1/__concepts/invocable.h:
 

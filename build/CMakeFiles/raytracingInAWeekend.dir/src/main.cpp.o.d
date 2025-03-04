@@ -881,4 +881,5 @@ CMakeFiles/raytracingInAWeekend.dir/src/main.cpp.o: \
   /Users/jack/raytracingInAWeekend/src/../include/ray.h \
   /Users/jack/raytracingInAWeekend/src/../include/interval.h \
   /Users/jack/raytracingInAWeekend/src/../include/hittableList.h \
-  /Users/jack/raytracingInAWeekend/src/../include/sphere.h
+  /Users/jack/raytracingInAWeekend/src/../include/sphere.h \
+  /Users/jack/raytracingInAWeekend/src/../include/camera.h
