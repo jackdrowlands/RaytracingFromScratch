@@ -11,15 +11,14 @@ int main() {
   auto totalStartTime = std::chrono::high_resolution_clock::now();
   
   hittableList world;
-  world.add(make_shared<sphere>(point3(-1, 0, -1), 0.5));
-  world.add(make_shared<sphere>(point3(0, 0, -5), 0.5));
-  world.add(make_shared<sphere>(point3(5, 0, -10), 0.5));
+  world.add(make_shared<sphere>(point3(0, 0, -1), 0.5));
   world.add(make_shared<sphere>(point3(0, -100.5, -1), 100));
 
   camera cam;
   cam.aspectRatio = 16.0 / 9.0;
   cam.imageWidth = 2560;  // Using a smaller resolution for profiling
   cam.samplesPerPixel = 10;  // Using fewer samples for profiling
+  cam.maxDepth = 10;
 
   auto renderStartTime = std::chrono::high_resolution_clock::now();
   cam.render(world);
