@@ -76,8 +76,8 @@ class camera {
     if (depth <=0) return color(0,0,0);
     hitRecord rec;
     if (world.hit(r, interval(0.001, INF), rec)) {
-      vec3 direction = randomOnHemisphere(rec.normal);
-      return 0.5 * rayColor(ray(rec.p, direction), depth-1, world);
+      vec3 direction = rec.normal + randomUnitVec3();
+      return 0.1 * rayColor(ray(rec.p, direction), depth-1, world);
     }
     vec3 unitDirection = unitVector(r.direction());
     auto a = 0.5 * (unitDirection.y() + 1.0);
