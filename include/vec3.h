@@ -40,6 +40,13 @@ class vec3 {
   double lengthSquared() const {
     return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
   }
+
+  bool nearZero() const {
+    auto s = 1e-8;
+    return (std::fabs(e[0]) < s) && (std::fabs(e[1]) < s) &&
+           (std::fabs(e[2]) < s);
+  }
+
   static vec3 random() {
     return vec3(randomDouble(), randomDouble(), randomDouble());
   }
@@ -87,9 +94,6 @@ inline vec3 cross(const vec3& u, const vec3& v) {
 
 inline vec3 unitVector(vec3 v) { return v / v.length(); }
 
-
-
-
 inline vec3 randomUnitVec3() {
   while (true) {
     auto p = vec3::random(-1,1);
@@ -106,6 +110,10 @@ inline vec3 randomOnHemisphere(const vec3& normal) {
   } else {
     return -onUnitSphere;
   }
+}
+
+inline vec3 reflect(const vec3& v, const vec3& n) {
+  return v - 2 * dot(v,n)*n;
 }
 
 #endif

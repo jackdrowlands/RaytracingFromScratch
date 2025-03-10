@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include "hittable.h"
+#include "material.h"
 
 class camera {
  public:
@@ -21,7 +22,7 @@ class camera {
       for (int j = 0; j < imageWidth; j++) {
         color pixelColor = color(0, 0, 0);
         for (int s = 0; s < samplesPerPixel; s++) {
-          ray r = getRay(i, j);
+          ray r = getRay(j, i);
           pixelColor += rayColor(r, maxDepth, world);
         }
         writeColor(std::cout, pixelColor * pixelSamplesScale);
@@ -63,8 +64,8 @@ class camera {
 
   ray getRay(int i, int j) {
     auto offset = sampleSquare();
-    auto pixelSample = pixel00Loc + (j + offset.x()) * pixelDeltaU +
-        (i + offset.y()) * pixelDeltaV;
+    auto pixelSample = pixel00Loc + (i + offset.x()) * pixelDeltaU +
+        (j + offset.y()) * pixelDeltaV;
     return ray(origin, pixelSample - origin);
   }
 
@@ -76,8 +77,12 @@ class camera {
     if (depth <=0) return color(0,0,0);
     hitRecord rec;
     if (world.hit(r, interval(0.001, INF), rec)) {
-      vec3 direction = rec.normal + randomUnitVec3();
-      return 0.1 * rayColor(ray(rec.p, direction), depth-1, world);
+      ray scattered;
+      color attenuation;
+      if (rec.mat->scatter(r, rec, attenuation, scattered)) {
+        return attenuation * rayColor(scattered, depth-1, world);
+      }
+      return color(0,0,0);
     }
     vec3 unitDirection = unitVector(r.direction());
     auto a = 0.5 * (unitDirection.y() + 1.0);
