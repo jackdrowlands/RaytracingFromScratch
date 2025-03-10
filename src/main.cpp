@@ -9,8 +9,8 @@ int main() {
 
   auto matGround = make_shared<lambertian>(color(0.8,0.8,0.0));
   auto matCenter = make_shared<lambertian>(color(0.1, 0.2, 0.5));
-  auto matLeft = make_shared<metal>(color(0.8, 0.8, 0.8));
-  auto matRight = make_shared<metal>(color(0.8, 0.6, 0.2));
+  auto matLeft = make_shared<metal>(color(0.8, 0.8, 0.8), 0.3);
+  auto matRight = make_shared<metal>(color(0.8, 0.6, 0.2), 0.7);
 
   world.add(make_shared<sphere>(point3( 0.0, -100.5, -1.0), 100.0, matGround));
   world.add(make_shared<sphere>(point3( 0.0,    0.0, -1.2),   0.5, matCenter));
