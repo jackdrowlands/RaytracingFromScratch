@@ -16,14 +16,12 @@ const double PI = std::numbers::pi;
 
 inline double degreesToRadians(double d) { return d * PI / 180.0; }
 
-// returns random real in [0,1)
 inline double randomDouble() {
   static std::uniform_real_distribution<double> distribution(0.0, 1.0);
-  static std::mt19937 generator;
+  static std::mt19937 generator(std::random_device{}());
   return distribution(generator);
 }
 
-// returns random real in [min, max)
 inline double randomDouble(double min, double max) {
   return min + (max - min) * randomDouble();
 }

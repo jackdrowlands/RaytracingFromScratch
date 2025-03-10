@@ -97,7 +97,7 @@ inline vec3 unitVector(vec3 v) { return v / v.length(); }
 inline vec3 randomUnitVec3() {
   while (true) {
     auto p = vec3::random(-1,1);
-    if (1e-160 < p.lengthSquared() && p.lengthSquared() <= 1) {
+    if (1e-8 < p.lengthSquared() && p.lengthSquared() <= 1) {
       return p;
     }
   }
@@ -114,6 +114,22 @@ inline vec3 randomOnHemisphere(const vec3& normal) {
 
 inline vec3 reflect(const vec3& v, const vec3& n) {
   return v - 2 * dot(v,n)*n;
+}
+
+inline vec3 refract(const vec3& uv, const vec3& n, double etaiOverEtat) {
+  auto cosTheta = std::fmin(dot(-uv, n), 1.0);
+  vec3 rOutPerp = etaiOverEtat * (uv + cosTheta*n);
+  vec3 rOutParallel = -std::sqrt(std::fabs(1.0 - rOutPerp.lengthSquared())) * n;
+  return rOutPerp + rOutParallel;
+}
+
+inline vec3 randomInUnitDisk() {
+  while (true) {
+    auto p = vec3(randomDouble(-1, 1), randomDouble(-1, 1), 0);
+    if (p.lengthSquared() < 1) {
+      return p;
+    }
+  }
 }
 
 #endif

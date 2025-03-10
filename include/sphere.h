@@ -28,7 +28,7 @@ class sphere : public hittable {
     auto root = (h - sqrtd) / a;
     if (!rayT.surrounds(root)) {
       root = (h + sqrtd) / a;
-    if (!rayT.surrounds(root)) return false;
+      if (!rayT.surrounds(root)) return false;
     }
 
     rec.t = root;

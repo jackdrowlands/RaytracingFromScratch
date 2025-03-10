@@ -6,9 +6,9 @@
 class interval {
     public:
     double max, min;
-    interval() : min(+INF), max(-INF) {}
+    interval() : min(+INF), max(-INF) {} // Empty interval
 
-    interval(double min, double max) : min(min) , max(max) {}
+    interval(double min, double max) : min(min), max(max) {}
 
     double size() const {
         return max - min;
@@ -26,7 +26,13 @@ class interval {
         return std::clamp(x, min, max);
     }
 
-    static const interval empty, universe;
+    // Define static variables inline to avoid linker errors
+    static const interval empty;
+    static const interval universe;
 };
+
+// Define the static members
+inline const interval interval::empty = interval(+INF, -INF);
+inline const interval interval::universe = interval(-INF, +INF);
 
 #endif
