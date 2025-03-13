@@ -1,6 +1,6 @@
 # Ray Tracing Engine
 
-![Ray Traced Scene](image.ppm)
+![Ray Traced Scene](image.png)
 
 ## Overview
 
